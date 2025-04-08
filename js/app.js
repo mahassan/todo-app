@@ -1,6 +1,7 @@
 const form = document.querySelector('#form');
 const inputField = document.querySelector('#new-item');
 const ul = document.querySelector('#items');
+const clear = document.querySelector('#clr')
 
 
 form.addEventListener('submit', (e)=>{
@@ -35,8 +36,16 @@ form.addEventListener('submit', (e)=>{
 })
 
 function deleteEntry(e){
-    console.dir(e.target);
     if(e.target.tagName === 'BUTTON'){
        e.target.parentElement.remove()
     }
 }
+function clearList(){
+    const listItems = ul.children;
+    //spreading because HTMLCollection is not iterable despite it having a length like an array
+    [...listItems].map(item =>{
+        item.remove();
+    })
+    //console.dir(ul.children)
+}
+clear.addEventListener('click', clearList)
