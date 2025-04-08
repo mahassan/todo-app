@@ -21,7 +21,10 @@ form.addEventListener('submit', (e)=>{
         //create a close icon
             const button = document.createElement('button');
             button.className = `delete-${inputField.value}`;
+            button.style.cursor = "pointer";
             button.innerText = 'x';
+        //add eventlistener to every button
+            button.addEventListener('click', deleteEntry)
         //attach to the ul
             ul.insertAdjacentElement('afterbegin', li);
             li.insertAdjacentElement('beforeend', input);
@@ -31,3 +34,9 @@ form.addEventListener('submit', (e)=>{
     }
 })
 
+function deleteEntry(e){
+    console.dir(e.target);
+    if(e.target.tagName === 'BUTTON'){
+       e.target.parentElement.remove()
+    }
+}
