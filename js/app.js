@@ -1,7 +1,9 @@
 const form = document.querySelector('#form');
 const inputField = document.querySelector('#new-item');
 const ul = document.querySelector('#items');
-const clear = document.querySelector('#clr')
+const clear = document.querySelector('#clr');
+const listItems = ul.children;
+const allButton = document.querySelector('.footer');
 
 
 form.addEventListener('submit', (e)=>{
@@ -15,6 +17,7 @@ form.addEventListener('submit', (e)=>{
             li.className = `items`
         //create text node
             const p = document.createElement('p');
+            p.className = 'item'
             p.innerText = inputField.value;
             // li.innerText = inputField.value;
         //connect the input and li, so that li is first then input type
@@ -41,11 +44,29 @@ function deleteEntry(e){
     }
 }
 function clearList(){
-    const listItems = ul.children;
+   
     //spreading because HTMLCollection is not iterable despite it having a length like an array
     [...listItems].map(item =>{
         item.remove();
     })
-    //console.dir(ul.children)
 }
-clear.addEventListener('click', clearList)
+//filter functionality
+function filterOnType(){
+    if([...listItems].length > 1){
+        [...listItems].filter(li => {
+            if(!li.children[1].innerText.includes(inputField.value)){
+                //check is the li contain the word being typed
+                li.style.display = "none";
+                //display just the one that is true otherwise hide other
+               
+            }
+        })
+    }
+}
+clear.addEventListener('click', clearList);
+inputField.addEventListener('keydown', filterOnType)
+
+//disable all button
+// const buttons = [...allButton.children].map((button)=>{
+//     button.setAttribute('disabled', true)
+// })
