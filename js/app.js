@@ -58,7 +58,8 @@ function filterOnType(){
                 //check is the li contain the word being typed
                 li.style.display = "none";
                 //display just the one that is true otherwise hide other
-               
+            }else{
+                li.style.display = "block";
             }
         })
     }
