@@ -9,32 +9,7 @@ const items = [];
 form.addEventListener('submit', (e)=>{
     e.preventDefault();
     if(inputField.value !== '' || inputField !== 0){
-        //create a checkbox
-            const input = document.createElement('input');
-            input.type = 'checkbox';
-        //create a new li
-            const li = document.createElement('li');
-            li.className = `items`
-        //create text node
-            const p = document.createElement('p');
-            p.className = 'item'
-            p.innerText = inputField.value;
-            // li.innerText = inputField.value;
-        //connect the input and li, so that li is first then input type
-            input.insertAdjacentElement('afterend', li);
-        //create a close icon
-            const button = document.createElement('button');
-            button.className = `delete-${inputField.value}`;
-            button.style.cursor = "pointer";
-            button.innerText = 'x';
-        //add eventlistener to every button
-            button.addEventListener('click', deleteEntry)
-        //attach to the ul
-            ul.insertAdjacentElement('afterbegin', li);
-            li.insertAdjacentElement('beforeend', input);
-            input.insertAdjacentElement('afterend',p);
-            p.insertAdjacentElement('afterend', button);
-            inputField.value = ""
+        createListItem(inputField.value)
         //localstorage
             savetoLS(li);
     }
@@ -82,6 +57,15 @@ window.addEventListener("DOMContentLoaded", ()=>{
     if(localStorage.getItem('todo').length >= 1){
         const ls = localStorage.getItem('todo');
         const processed = JSON.parse(ls);
+        processed.map(item => createListItem(item))
+    }
+})
+
+//As the code for adding in repeating on window onload and submit, lets make it into a function
+function createListItem(text){
+    if(localStorage.getItem('todo').length >= 1){
+        const ls = localStorage.getItem('todo');
+        const processed = JSON.parse(ls);
         processed.map(item =>{
                 //create a checkbox
                     const input = document.createElement('input');
@@ -93,7 +77,7 @@ window.addEventListener("DOMContentLoaded", ()=>{
             //create text node
                 const p = document.createElement('p');
                 p.className = 'item'
-                p.innerText = item;
+                p.innerText = text;
                 // li.innerText = inputField.value;
             //connect the input and li, so that li is first then input type
                 input.insertAdjacentElement('afterend', li);
@@ -110,9 +94,5 @@ window.addEventListener("DOMContentLoaded", ()=>{
                 input.insertAdjacentElement('afterend',p);
                 p.insertAdjacentElement('afterend', button);
         });
-    
     }
-    //when the page load,
-    //check if LS has items called todo, if it does 
-    //loop over the items and insert it into the page
-})
+}
