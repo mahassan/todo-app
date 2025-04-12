@@ -4,7 +4,7 @@ const ul = document.querySelector('#items');
 const clear = document.querySelector('#clr');
 const listItems = ul.children;
 const allButton = document.querySelector('.footer');
-
+const items = [];
 
 form.addEventListener('submit', (e)=>{
     e.preventDefault();
@@ -35,6 +35,8 @@ form.addEventListener('submit', (e)=>{
             input.insertAdjacentElement('afterend',p);
             p.insertAdjacentElement('afterend', button);
             inputField.value = ""
+        //localstorage
+            savetoLS(li);
     }
 })
 
@@ -59,15 +61,19 @@ function filterOnType(){
                 li.style.display = "none";
                 //display just the one that is true otherwise hide other
             }else{
-                li.style.display = "block";
+                li.style.display = "flex";
             }
         })
     }
 }
-clear.addEventListener('click', clearList);
-inputField.addEventListener('keydown', filterOnType)
 
-//disable all button
-// const buttons = [...allButton.children].map((button)=>{
-//     button.setAttribute('disabled', true)
-// })
+function savetoLS(li){
+    //when the use enter submit, 
+    // the value should be added to local storage
+    items.push(li.children[1].innerText)
+    localStorage.setItem('todo', JSON.stringify(items))
+    
+    //when the user refresh the page, if LS has item it in, display it in the list
+}
+clear.addEventListener('click', clearList);
+inputField.addEventListener('keydown', filterOnType);
