@@ -77,7 +77,7 @@ function createListItem(text){
             //create text node
                 const p = document.createElement('p');
                 p.className = 'item'
-                p.innerText = text;
+                p.innerText = item;
                 // li.innerText = inputField.value;
             //connect the input and li, so that li is first then input type
                 input.insertAdjacentElement('afterend', li);
