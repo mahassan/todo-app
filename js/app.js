@@ -8,10 +8,10 @@ const items = [];
 
 form.addEventListener('submit', (e)=>{
     e.preventDefault();
-    if(inputField.value !== '' || inputField !== 0){
+    if(inputField.value !== ''){
         createListItem(inputField.value)
         //localstorage
-            savetoLS(inputField.value);
+        savetoLS(inputField.value);
         inputField.value = '';
     }
 })
@@ -76,16 +76,11 @@ window.addEventListener("DOMContentLoaded", ()=>{
     if(localStorage.getItem('todo')){
         const ls = localStorage.getItem('todo');
         const processed = JSON.parse(ls);
-        processed.map(item => createListItem(item))
+        processed.map(item => getItemsFromLS(item))
     }
 })
 
 function createListItem(text){
-    if(!listItems.length >= 1){
-        if(localStorage.getItem('todo')){
-            const ls = localStorage.getItem('todo');
-            const processed = JSON.parse(ls);
-            processed.map(item =>{
                     //create a checkbox
                         const input = document.createElement('input');
                         input.type = 'checkbox';
@@ -112,7 +107,38 @@ function createListItem(text){
                     li.insertAdjacentElement('beforeend', input);
                     input.insertAdjacentElement('afterend',p);
                     p.insertAdjacentElement('afterend', button);
-            });
-        }
+}
+function getItemsFromLS(text){
+    if(!listItems.length >= 1){
+        const ls = localStorage.getItem('todo');
+        const processed = JSON.parse(ls);
+        processed.map(item =>{
+                //create a checkbox
+                    const input = document.createElement('input');
+                    input.type = 'checkbox';
+    //refactor following code
+                //create a new li
+                const li = document.createElement('li');
+                li.className = `items`
+            //create text node
+                const p = document.createElement('p');
+                p.className = 'item'
+                p.innerText = item;
+                // li.innerText = inputField.value;
+            //connect the input and li, so that li is first then input type
+                input.insertAdjacentElement('afterend', li);
+            //create a close icon
+                const button = document.createElement('button');
+                button.className = `delete-${inputField.value}`;
+                button.style.cursor = "pointer";
+                button.innerText = 'x';
+            //add eventlistener to every button
+                button.addEventListener('click', deleteEntry)
+            //attach to the ul
+                ul.insertAdjacentElement('afterbegin', li);
+                li.insertAdjacentElement('beforeend', input);
+                input.insertAdjacentElement('afterend',p);
+                p.insertAdjacentElement('afterend', button);
+        });
     }
 }
