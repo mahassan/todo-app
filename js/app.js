@@ -11,7 +11,8 @@ form.addEventListener('submit', (e)=>{
     if(inputField.value !== '' || inputField !== 0){
         createListItem(inputField.value)
         //localstorage
-            savetoLS(li);
+            savetoLS(inputField.value);
+        inputField.value = '';
     }
 })
 
@@ -19,6 +20,7 @@ function deleteEntry(e){
     if(e.target.tagName === 'BUTTON'){
        e.target.parentElement.remove()
     }
+    removeFromLS()
 }
 function clearList(){
    
@@ -45,54 +47,72 @@ function filterOnType(){
 function savetoLS(li){
     //when the use enter submit, 
     // the value should be added to local storage
-    items.push(li.children[1].innerText)
+    items.push(li)
     localStorage.setItem('todo', JSON.stringify(items))
     
     //when the user refresh the page, if LS has item it in, display it in the list
 }
+//remove item from LS when x is pressed
+function removeFromLS(item){
+    //when user click x button next to item, it deletes from the UI but it should also delete from LS
+    if(localStorage.getItem('todo') !== ''){
+        const listOfItems = JSON.parse(localStorage.getItem('todo'));
+        listOfItems.filter((text, index)=>{
+            if(text === listItems[index].innerText){
+                console.log(localStorage.removeItem(listOfItems.splice(0,1, text)))
+                localStorage.removeItem(listOfItems.splice(0,1, text))
+            }
+        })
+    }
+    //json parse the LS property
+    //find the word that has been removed
+    //remove it
+}
+
 clear.addEventListener('click', clearList);
 inputField.addEventListener('keydown', filterOnType);
 
 window.addEventListener("DOMContentLoaded", ()=>{
-    if(localStorage.getItem('todo').length >= 1){
+    if(localStorage.getItem('todo')){
         const ls = localStorage.getItem('todo');
         const processed = JSON.parse(ls);
         processed.map(item => createListItem(item))
     }
 })
 
-//As the code for adding in repeating on window onload and submit, lets make it into a function
 function createListItem(text){
-    if(localStorage.getItem('todo').length >= 1){
-        const ls = localStorage.getItem('todo');
-        const processed = JSON.parse(ls);
-        processed.map(item =>{
-                //create a checkbox
-                    const input = document.createElement('input');
-                    input.type = 'checkbox';
-    //refactor following code
-                //create a new li
-                const li = document.createElement('li');
-                li.className = `items`
-            //create text node
-                const p = document.createElement('p');
-                p.className = 'item'
-                p.innerText = item;
-                // li.innerText = inputField.value;
-            //connect the input and li, so that li is first then input type
-                input.insertAdjacentElement('afterend', li);
-            //create a close icon
-                const button = document.createElement('button');
-                button.className = `delete-${inputField.value}`;
-                button.style.cursor = "pointer";
-                button.innerText = 'x';
-            //add eventlistener to every button
-                button.addEventListener('click', deleteEntry)
-            //attach to the ul
-                ul.insertAdjacentElement('afterbegin', li);
-                li.insertAdjacentElement('beforeend', input);
-                input.insertAdjacentElement('afterend',p);
-                p.insertAdjacentElement('afterend', button);
-        });
+    if(!listItems.length >= 1){
+        if(localStorage.getItem('todo')){
+            const ls = localStorage.getItem('todo');
+            const processed = JSON.parse(ls);
+            processed.map(item =>{
+                    //create a checkbox
+                        const input = document.createElement('input');
+                        input.type = 'checkbox';
+        //refactor following code
+                    //create a new li
+                    const li = document.createElement('li');
+                    li.className = `items`
+                //create text node
+                    const p = document.createElement('p');
+                    p.className = 'item'
+                    p.innerText = text;
+                    // li.innerText = inputField.value;
+                //connect the input and li, so that li is first then input type
+                    input.insertAdjacentElement('afterend', li);
+                //create a close icon
+                    const button = document.createElement('button');
+                    button.className = `delete-${inputField.value}`;
+                    button.style.cursor = "pointer";
+                    button.innerText = 'x';
+                //add eventlistener to every button
+                    button.addEventListener('click', deleteEntry)
+                //attach to the ul
+                    ul.insertAdjacentElement('afterbegin', li);
+                    li.insertAdjacentElement('beforeend', input);
+                    input.insertAdjacentElement('afterend',p);
+                    p.insertAdjacentElement('afterend', button);
+            });
+        }
     }
 }
