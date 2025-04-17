@@ -1,0 +1,31 @@
+.container{
+    display: grid;
+    justify-content: center;
+}
+header{
+    background-image: url('../images/bg-mobile-light.jpg');
+    background-repeat: no-repeat;
+    width: 375px;
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+li{
+    display: flex;
+    align-items: center;
+}
+main,
+.footer{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+.form--input{
+    border:0;
+    margin-top:-50px;
+    display: block;
+}
+.footer{
+    flex-direction: unset;
+}
