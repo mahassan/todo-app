@@ -8,23 +8,26 @@
   
   <title>Frontend Mentor | Todo app</title>
 
- <link rel="stylesheet" href="./css//base.css">
+ <link rel="stylesheet" href="./css/base.css">
+ <link rel="stylesheet" href="./css/style.css">
  <script src="./js/app.js" defer></script>
 </head>
 <body>
 
-<div class="conatiner">
+<div class="container">
+    <header>
       <div class="heading">
         <h1>Todo App</h1>
       </div>
       <div class="theme">
         <button>Toggle</button>
       </div>
+    </header>
   <main>
-
     <form id="form">
-      <label for="new-item">Add new to-do item</label>
+      <label for="new-item" class="form--input">Add new to-do item
        <input type="text" id="new-item" name="new-item" />
+       </label>
     </form>
     <ul id="items">
     </ul>
@@ -34,10 +37,11 @@
 
   <!-- Add dynamic number --> items left
 <div class="footer">
-    <button>All</button>
-    <button>Active</button>
-    <button>Completed</button>
-    <button>Clear Completed</button>
+    <button id="all">All</button>
+    <button id="active">Active</button>
+    <button id="completed">Completed</button>
+    <button id="clr-completed">Clear Completed</button>
+    <button id="clr">Clear</button>
   
   <p>Drag and drop to reorder list</p>
 </div>
