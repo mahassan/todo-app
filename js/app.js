@@ -6,6 +6,7 @@ const listItems = ul.children;
 const allButton = document.querySelector('.footer');
 const items = [];
 
+
 form.addEventListener('submit', (e)=>{
     e.preventDefault();
     if(inputField.value !== ''){
@@ -26,7 +27,9 @@ function clearList(){
    
     //spreading because HTMLCollection is not iterable despite it having a length like an array
     [...listItems].map(item =>{
-        item.remove();
+            if(item.children[0].checked){
+                item.children[0].checked = false;
+            }
     })
 }
 //filter functionality
@@ -82,13 +85,14 @@ window.addEventListener("DOMContentLoaded", ()=>{
 
 function createListItem(text){
                     //create a checkbox
-                        const input = document.createElement('input');
-                        input.type = 'checkbox';
-        //refactor following code
+                    const input = document.createElement('input');
+                    input.type = 'checkbox';
+                    //add checked attribute to every list item
+                    input.addEventListener('click', toggleCheckbox)
                     //create a new li
                     const li = document.createElement('li');
                     li.className = `items`
-                //create text node
+                    //create text node
                     const p = document.createElement('p');
                     p.className = 'item'
                     p.innerText = text;
@@ -116,7 +120,6 @@ function getItemsFromLS(text){
                 //create a checkbox
                     const input = document.createElement('input');
                     input.type = 'checkbox';
-    //refactor following code
                 //create a new li
                 const li = document.createElement('li');
                 li.className = `items`
@@ -140,5 +143,12 @@ function getItemsFromLS(text){
                 input.insertAdjacentElement('afterend',p);
                 p.insertAdjacentElement('afterend', button);
         });
+    }
+}
+function toggleCheckbox(e){
+    if(e.target.checked){
+        e.target.parentElement.classList.add('checked');
+    }else{
+        e.target.parentElement.classList.remove('checked');
     }
 }
