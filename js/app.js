@@ -2,6 +2,7 @@ const form = document.querySelector('#form');
 const inputField = document.querySelector('#new-item');
 const ul = document.querySelector('#items');
 const clear = document.querySelector('#clr');
+const activeBtn = document.querySelector('#active');
 const listItems = ul.children;
 const allButton = document.querySelector('.footer');
 const items = [];
@@ -31,6 +32,13 @@ function clearList(){
                 item.children[0].checked = false;
             }
     })
+}
+function toggleActive(){
+    [...listItems].map(item =>{
+        if(item.children[0].checked === true){
+            item.children[0].parentElement.style.display = "none"
+        }
+})
 }
 //filter functionality
 function filterOnType(){
@@ -88,7 +96,9 @@ function createListItem(text){
                     const input = document.createElement('input');
                     input.type = 'checkbox';
                     //add checked attribute to every list item
-                    input.addEventListener('click', toggleCheckbox)
+                    input.addEventListener('click', toggleCheckbox);
+                    //event handler for active buttons
+                    activeBtn.addEventListener('click', toggleActive)
                     //create a new li
                     const li = document.createElement('li');
                     li.className = `items`
