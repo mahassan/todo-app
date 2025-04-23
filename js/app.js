@@ -4,8 +4,8 @@ const ul = document.querySelector('#items');
 const clear = document.querySelector('#clr');
 const activeBtn = document.querySelector('#active');
 const completedBtn = document.querySelector('#completed');
+const allButton = document.querySelector('#all');
 const listItems = ul.children;
-const allButton = document.querySelector('.footer');
 const items = [];
 
 
@@ -34,17 +34,24 @@ function clearList(){
             }
     })
 }
-function toggleActive(){
+function activeButton(){
+    [...listItems].map(item =>{
+        if(!item.classList.contains('checked')){
+            item.style.display = "none";
+        }
+    })
+}
+function completedButton(){
     [...listItems].map(item =>{
         if(item.children[0].checked === true){
             item.children[0].parentElement.style.display = "none"
         }
     })
 }
-function completedButton(){
-    [...listItems].map(item =>{
-        if(item.children[0].checked !== true){
-            item.children[0].parentElement.style.display = "none"
+function showAllTasks(){
+    [...listItems].mao(item =>{
+        if(item.children[0].parentElement.style.display = "none"){
+            item.children[0].parentElement.style.display = "block"
         }
     })
 }
@@ -89,7 +96,7 @@ function removeFromLS(item){
 }
 
 clear.addEventListener('click', clearList);
-inputField.addEventListener('keydown', filterOnType);
+// inputField.addEventListener('keydown', filterOnType);
 
 window.addEventListener("DOMContentLoaded", ()=>{
     if(localStorage.getItem('todo')){
@@ -106,9 +113,11 @@ function createListItem(text){
                     //add checked attribute to every list item
                     input.addEventListener('click', toggleCheckbox);
                     //event handler for active button
-                    activeBtn.addEventListener('click', toggleActive)
-                    //event handlder for complete button
+                    activeBtn.addEventListener('click', activeButton)
+                    //event handler for complete button
                     completedBtn.addEventListener('click', completedButton);
+                    //event handle for all button
+                    allButton.addEventListener('click', showAllTasks)
                     //create a new li
                     const li = document.createElement('li');
                     li.className = `items`
