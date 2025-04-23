@@ -49,7 +49,7 @@ function completedButton(){
     })
 }
 function showAllTasks(){
-    [...listItems].mao(item =>{
+    [...listItems].map(item =>{
         if(item.children[0].parentElement.style.display = "none"){
             item.children[0].parentElement.style.display = "block"
         }
