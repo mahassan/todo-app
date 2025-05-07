@@ -1,3 +1,7 @@
+
+body{
+    background: hsl(236, 33%, 92%);
+}
 .container{
     display: grid;
     justify-content: center;
@@ -10,13 +14,14 @@ header{
     display: flex;
     align-items: center;
     justify-content: space-between;
+    padding:0 20px;
 }
 li{
     display: flex;
     align-items: center;
     border-bottom: 1px solid grey;
 }
-.container{
+.footer button{
     background: hsl(0, 0%, 98%); 
 }
 ul{
@@ -26,17 +31,22 @@ ul{
     display: flex;
     justify-content: space-between;
     align-items: anchor-center;
+    padding:15px;
+    background-color: #fff;
+    border-radius: 5px;
 }
-header,
-main{
-    padding:20px;
-    box-sizing: border-box;
+div.items{
+    margin:10px 15px;
 }
 main,
 .footer{
     display: flex;
     justify-content: center;
     flex-direction: column;
+}
+button{
+    background: none;
+    border:0;
 }
 .form--input{
     margin-top:-50px;
@@ -46,9 +56,15 @@ main,
 input[type='text']{
     height:30px;
     border:0;
-    border-radius: 2px;
     width:100%;
+    border-radius: 5px;
+    padding: 0 15px;
 }
 .footer{
     flex-direction: unset;
+    justify-content: space-evenly;
+    background: #fff;
+    border-radius: 5px;
+    padding: 15px 0;
+    margin:0 15px;
 }

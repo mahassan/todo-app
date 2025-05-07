@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
 
   <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
-  
+  <script src="https://kit.fontawesome.com/ce7ef06f98.js" crossorigin="anonymous"></script>
   <title>Frontend Mentor | Todo app</title>
 
  <link rel="stylesheet" href="./css/base.css">
@@ -20,7 +20,7 @@
         <h1>Todo App</h1>
       </div>
       <div class="theme">
-        <button>Toggle</button>
+        <button><i class="fa-solid fa-moon"></i></button>
       </div>
     </header>
   <main>
@@ -31,21 +31,20 @@
     </form>
     <ul id="items">
     </ul>
-  </main>
   <section>
     <div class="items">
       <p>item left</p>
       <button id="clr-completed">Clear Completed</button>
     </div>
   </section>
+</main>
+    <div class="footer">
+      <button id="all"><a href="#">All</a></button>
+      <button id="active"><a href="#">Active</a></button>
+      <button id="completed"><a href="#">Completed</a></button>
+    
+    <!-- <p>Drag and drop to reorder list</p> -->
+    </div>
 </div>
-<div class="footer">
-    <button id="all">All</button>
-    <button id="active">Active</button>
-    <button id="completed">Completed</button>
-  
-  <!-- <p>Drag and drop to reorder list</p> -->
-</div>
-  </div>
 </body>
 </html>
