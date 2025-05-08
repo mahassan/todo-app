@@ -132,7 +132,7 @@ function createListItem(text){
                     const button = document.createElement('button');
                     button.className = `delete-${inputField.value}`;
                     button.style.cursor = "pointer";
-                    button.innerText = 'x';
+                    button.innerHTML = `<i class="fa-solid fa-xmark"></i>`;
                 //add eventlistener to every button
                     button.addEventListener('click', deleteEntry)
                 //attach to the ul
