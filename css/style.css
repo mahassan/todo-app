@@ -10,25 +10,30 @@ header{
     background-image: url('../images/bg-mobile-light.jpg');
     background-repeat: no-repeat;
     width: 375px;
-    height: 200px;
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding:0 20px;
+}
+header h1{
+    font-weight: 100;
+    text-transform: uppercase;
+    color: #fff;
 }
 li{
     display: flex;
     align-items: center;
     border-bottom: 1px solid grey;
 }
-ul li.items:not(:first-child){
-    margin:0 15px;
-    border-radius: 0;
+ul li.items:first-child{
+    margin:15px 15px 0;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
 }
 ul li.items:last-child{
-    margin:15px 15px 0;
-    border-top-left-radius: 0;
-    border-top-right-radius: 0;
+    margin:0px 15px 0;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
 }
 li.items p{
     flex-grow:2;
@@ -41,16 +46,24 @@ li.items input[type="checkbox"]{
     border:1px solid lightgrey;
     margin-right: 10px;
 }
+li.items input[type="checkbox"]:checked{
+    content: "";
+    background: #57DDFF;
+    background: linear-gradient(140deg, rgba(87, 221, 255, 1) 0%, rgba(192, 88, 243, 1) 100%);
+}
 li.items,
 div.items{
-    margin:10px 15px;
     display: flex;
     padding:15px;
     background-color: #fff;
-    border-radius: 5px;
+    border-radius: 0;
+}
+li.items{
+    margin:0 15px 0;
 }
 div.items{
     justify-content: space-between;
+    margin:10px 15px;
 }
 main,
 .footer{
