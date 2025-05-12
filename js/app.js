@@ -23,9 +23,12 @@ form.addEventListener('submit', (e)=>{
 function deleteEntry(e){
     if(e.target.tagName === 'I'){
        e.target.parentElement.parentElement.remove()
-       remainingItems.innerHTML = `${e.target.parentElement.parentElement.children.length} items left`
+       if(ul.children.length >= 1){
+            remainingItems.innerHTML = `${ul.children.length} items left`
+       }else{
+            remainingItems.style.visibility = "hidden"
+       }
     }
-    console.dir(e.target.parentElement.parentElement)
     removeFromLS()
 }
 function clearList(){

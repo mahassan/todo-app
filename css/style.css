@@ -3,17 +3,23 @@ body{
     background: hsl(236, 33%, 92%);
 }
 .container{
-    display: grid;
+    display: flex;
+    flex-direction: column;
     justify-content: center;
 }
 header{
     background-image: url('../images/bg-mobile-light.jpg');
     background-repeat: no-repeat;
     width: 375px;
+    height: 200px;
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding:0 20px;
+    @media (min-width: 375px) {
+        background-image: url('../images/bg-desktop-light.jpg');
+        width: 1440px;
+    }
 }
 header h1{
     font-weight: 100;
@@ -45,11 +51,15 @@ li.items input[type="checkbox"]{
     padding:10px;
     border:1px solid lightgrey;
     margin-right: 10px;
+    cursor: pointer;
 }
 li.items input[type="checkbox"]:checked{
     content: "";
     background: #57DDFF;
     background: linear-gradient(140deg, rgba(87, 221, 255, 1) 0%, rgba(192, 88, 243, 1) 100%);
+}
+.strike{
+    text-decoration: line-through;
 }
 li.items,
 div.items{
