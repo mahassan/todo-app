@@ -5,6 +5,7 @@ const clear = document.querySelector('#clr');
 const activeBtn = document.querySelector('#active');
 const completedBtn = document.querySelector('#completed');
 const allButton = document.querySelector('#all');
+const remainingItems = document.querySelector('.listOfItems');
 const listItems = ul.children;
 const items = [];
 
@@ -20,9 +21,11 @@ form.addEventListener('submit', (e)=>{
 })
 
 function deleteEntry(e){
-    if(e.target.tagName === 'BUTTON'){
-       e.target.parentElement.remove()
+    if(e.target.tagName === 'I'){
+       e.target.parentElement.parentElement.remove()
+       remainingItems.innerHTML = `${e.target.parentElement.parentElement.children.length} items left`
     }
+    console.dir(e.target.parentElement.parentElement)
     removeFromLS()
 }
 function clearList(){
