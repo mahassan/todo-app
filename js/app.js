@@ -26,7 +26,7 @@ function deleteEntry(e){
        if(ul.children.length >= 1){
             remainingItems.innerHTML = `${ul.children.length} items left`
        }else{
-            remainingItems.style.visibility = "hidden"
+            remainingItems.innerHTML = `${ul.children.length} items left`
        }
     }
     removeFromLS()
