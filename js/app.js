@@ -1,7 +1,7 @@
 const form = document.querySelector('#form');
 const inputField = document.querySelector('#new-item');
 const ul = document.querySelector('#items');
-const clear = document.querySelector('#clr');
+const clear = document.querySelector('.fa-moon');
 const activeBtn = document.querySelector('#active');
 const completedBtn = document.querySelector('#completed');
 const allButton = document.querySelector('#all');
@@ -21,15 +21,16 @@ form.addEventListener('submit', (e)=>{
 })
 
 function deleteEntry(e){
-    if(e.target.tagName === 'I'){
-       e.target.parentElement.parentElement.remove()
+    if(e.target.tagName === 'BUTTON'){
+       e.target.parentElement.remove()
        if(ul.children.length >= 1){
             remainingItems.innerHTML = `${ul.children.length} items left`
        }else{
             remainingItems.innerHTML = `${ul.children.length} items left`
        }
     }
-    removeFromLS()
+    console.log(e.target.previousElementSiblings.innerText)
+    removeFromLS(e.target.parentElement.childNodes[1].innerText)
 }
 function clearList(){
    
@@ -89,16 +90,12 @@ function removeFromLS(item){
     //when user click x button next to item, it deletes from the UI but it should also delete from LS
     if(localStorage.getItem('todo') !== ''){
         const listOfItems = JSON.parse(localStorage.getItem('todo'));
-        listOfItems.filter((text, index)=>{
-            if(text === listItems[index].innerText){
-                console.log(localStorage.removeItem(listOfItems.splice(0,1, text)))
-                localStorage.removeItem(listOfItems.splice(0,1, text))
+        listOfItems.filter((text)=>{
+            if(text === item){
+                localStorage.removeItem(text)
             }
         })
     }
-    //json parse the LS property
-    //find the word that has been removed
-    //remove it
 }
 
 clear.addEventListener('click', clearList);
@@ -110,6 +107,11 @@ window.addEventListener("DOMContentLoaded", ()=>{
         const processed = JSON.parse(ls);
         processed.map(item => getItemsFromLS(item))
     }
+    if(ul.children.length >= 1){
+        remainingItems.innerHTML = `${ul.children.length} items left`
+   }else{
+        remainingItems.innerHTML = `${ul.children.length} items left`
+   }
 })
 
 function createListItem(text){
@@ -138,7 +140,7 @@ function createListItem(text){
                     const button = document.createElement('button');
                     button.className = `delete-${inputField.value}`;
                     button.style.cursor = "pointer";
-                    button.innerHTML = `<i class="fa-solid fa-xmark"></i>`;
+                    button.innerHTML = `<i class="fa-solid fa-xmark fa-1x"></i>`;
                 //add eventlistener to every button
                     button.addEventListener('click', deleteEntry)
                 //attach to the ul
@@ -183,7 +185,9 @@ function getItemsFromLS(text){
 function toggleCheckbox(e){
     if(e.target.checked){
         e.target.parentElement.classList.add('checked');
+        e.target.nextElementSibling.classList.add('strike')
     }else{
         e.target.parentElement.classList.remove('checked');
+        e.target.nextElementSibling.classList.remove('strike')
     }
 }

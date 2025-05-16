@@ -1,20 +1,10 @@
 
-body{
-    background: hsl(236, 33%, 92%);
-}
-.container{
-
-}
 header{
     background-image: url('../images/bg-mobile-light.jpg');
     background-repeat: no-repeat;
     width: 100%;
     height: 200px;
     padding:0 20px;
-    @media (min-width: 375px) {
-        background-image: url('../images/bg-desktop-light.jpg');
-        max-width: 1440px;
-    }
 }
 .heading__container{
     width: 100%;
@@ -22,9 +12,6 @@ header{
     display: flex;
     justify-content: space-between;
     padding: 60px 0 30px;
-    @media (min-width: 375px){
-        width: 375px;
-    }
 }
 header h1{
     font-weight: 100;
@@ -36,13 +23,16 @@ li{
     align-items: center;
     border-bottom: 1px solid grey;
 }
+ul{
+    margin: 15px 0 15px;
+}
 ul li.items:first-child{
-    margin:15px 15px 0;
+    /* margin:15px 15px 0; */
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
 }
 ul li.items:last-child{
-    margin:0px 15px 0;
+    /* margin:0px 15px 0; */
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
 }
@@ -75,6 +65,9 @@ div.items{
 li.items{
     margin:0 15px 0;
 }
+div.items{
+    padding: 0 15px 0;
+}
 main,
 footer{
     width:100%;
@@ -100,11 +93,28 @@ input[type='text']{
     padding: 0 15px;
     margin:0 15px;
 }
+input[type='text']::before{
+    content: "";
+    border:1px solid red;
+}
 /* footer */
 .footer{
+    padding:15px 0;
     background: #fff;
     border-radius: 5px;
     margin:20px 15px 0;
     display: flex;
     justify-content: space-evenly;
+}
+
+/* Media Queries */
+@media (min-width: 375px) {
+    header{
+        background-image: url('../images/bg-desktop-light.jpg');
+        max-width: 1440px;
+    }
+    .heading__container{
+        width: 375px;
+        padding:60px 10px 15px;
+    }
 }
