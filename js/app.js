@@ -21,15 +21,15 @@ form.addEventListener('submit', (e)=>{
 })
 
 function deleteEntry(e){
-    if(e.target.tagName === 'BUTTON'){
-       e.target.parentElement.remove()
+    if(e.target.tagName === 'I'){
+       e.target.parentElement.parentElement.remove()
        if(ul.children.length >= 1){
             remainingItems.innerHTML = `${ul.children.length} items left`
        }else{
             remainingItems.innerHTML = `${ul.children.length} items left`
        }
     }
-    console.log(e.target.previousElementSiblings.innerText)
+    console.log(e.target.parentElement.childNodes[1].innerText)
     removeFromLS(e.target.parentElement.childNodes[1].innerText)
 }
 function clearList(){
@@ -57,6 +57,7 @@ function completedButton(){
 }
 function showAllTasks(){
     [...listItems].map(item =>{
+        debugger
         if(item.children[0].parentElement.style.display = "none"){
             item.children[0].parentElement.style.display = "flex"
         }
@@ -149,38 +150,8 @@ function createListItem(text){
                     input.insertAdjacentElement('afterend',p);
                     p.insertAdjacentElement('afterend', button);
 }
-function getItemsFromLS(text){
-    if(!listItems.length >= 1){
-        const ls = localStorage.getItem('todo');
-        const processed = JSON.parse(ls);
-        processed.map(item =>{
-                //create a checkbox
-                    const input = document.createElement('input');
-                    input.type = 'checkbox';
-                //create a new li
-                const li = document.createElement('li');
-                li.className = `items`
-            //create text node
-                const p = document.createElement('p');
-                p.className = 'item'
-                p.innerText = item;
-                // li.innerText = inputField.value;
-            //connect the input and li, so that li is first then input type
-                input.insertAdjacentElement('afterend', li);
-            //create a close icon
-                const button = document.createElement('button');
-                button.className = `delete-${inputField.value}`;
-                button.style.cursor = "pointer";
-                button.innerText = 'x';
-            //add eventlistener to every button
-                button.addEventListener('click', deleteEntry)
-            //attach to the ul
-                ul.insertAdjacentElement('afterbegin', li);
-                li.insertAdjacentElement('beforeend', input);
-                input.insertAdjacentElement('afterend',p);
-                p.insertAdjacentElement('afterend', button);
-        });
-    }
+function getItemsFromLS(text){ //consolidate with creating new item
+    createListItem(text)
 }
 function toggleCheckbox(e){
     if(e.target.checked){
