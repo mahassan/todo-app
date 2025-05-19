@@ -29,8 +29,8 @@ function deleteEntry(e){
             remainingItems.innerHTML = `${ul.children.length} items left`
        }
     }
-    console.log(e.target.parentElement.childNodes[1].innerText)
-    removeFromLS(e.target.parentElement.childNodes[1].innerText)
+    const text = e.target.parentElement.previousElementSibling.innerText;
+    removeFromLS(text);
 }
 function clearList(){
    
@@ -89,6 +89,7 @@ function savetoLS(li){
 //remove item from LS when x is pressed
 function removeFromLS(item){
     //when user click x button next to item, it deletes from the UI but it should also delete from LS
+    //debugger
     if(localStorage.getItem('todo') !== ''){
         const listOfItems = JSON.parse(localStorage.getItem('todo'));
         listOfItems.filter((text)=>{
