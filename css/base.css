@@ -68,3 +68,6 @@ a{
 a:hover{
     color: hsl(220, 98%, 61%);
 }
+.theme-box{
+  cursor: pointer;
+}

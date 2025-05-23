@@ -8,6 +8,12 @@ const allButton = document.querySelector('#all');
 const remainingItems = document.querySelector('.listOfItems');
 const listItems = ul.children;
 const items = [];
+const theme = document.querySelector('.theme button');
+const themeButton = document.querySelector('.theme-box')
+const head = document.getElementsByTagName('head');
+let moon = document.querySelector('.fa-moon');
+let deleteItem;
+
 
 
 form.addEventListener('submit', (e)=>{
@@ -87,16 +93,13 @@ function savetoLS(li){
     //when the user refresh the page, if LS has item it in, display it in the list
 }
 //remove item from LS when x is pressed
-function removeFromLS(item){
+function removeFromLS(clickedItem){
     //when user click x button next to item, it deletes from the UI but it should also delete from LS
-    //debugger
     if(localStorage.getItem('todo') !== ''){
-        const listOfItems = JSON.parse(localStorage.getItem('todo'));
-        listOfItems.filter((text)=>{
-            if(text === item){
-                localStorage.removeItem(text)
-            }
-        })
+        //make the string readable and iterable
+        const listOfItemsAsArray = JSON.parse(localStorage.getItem('todo'));
+        const found = listOfItemsAsArray.filter(item => item !== clickedItem);
+        localStorage.setItem('todo', JSON.stringify(found));
     }
 }
 
@@ -114,8 +117,25 @@ window.addEventListener("DOMContentLoaded", ()=>{
    }else{
         remainingItems.innerHTML = `${ul.children.length} items left`
    }
+   theme.addEventListener('click', ()=>{
+       const children = head[0].children;
+       [...children].map(item => {
+         if(item.nodeName === 'LINK' && item.href.includes('light-theme.css')){
+             item.href = './css/dark-theme.css';
+             deleteItem.style.color= "white";
+             themeButton.style.color = "white";
+             moon.classList.remove('fa-moon');
+             moon.classList.add('fa-sun');
+         }else if (item.nodeName === 'LINK' && item.href.includes('dark-theme.css')){
+            item.href = './css/light-theme.css';
+            deleteItem.style.color = "black"
+            themeButton.style.color = "black";
+             moon.classList.remove('fa-sun');
+             moon.classList.add('fa-moon');
+         }
+       })
+   })
 })
-
 function createListItem(text){
                     //create a checkbox
                     const input = document.createElement('input');
@@ -139,17 +159,17 @@ function createListItem(text){
                 //connect the input and li, so that li is first then input type
                     input.insertAdjacentElement('afterend', li);
                 //create a close icon
-                    const button = document.createElement('button');
-                    button.className = `delete-${inputField.value}`;
-                    button.style.cursor = "pointer";
-                    button.innerHTML = `<i class="fa-solid fa-xmark fa-1x"></i>`;
+                    deleteItem = document.createElement('button');
+                    deleteItem.className = `deleteEntry`;
+                    deleteItem.style.cursor = "pointer";
+                    deleteItem.innerHTML = `<i class="fa-solid fa-xmark fa-1x"></i>`;
                 //add eventlistener to every button
-                    button.addEventListener('click', deleteEntry)
+                    deleteItem.addEventListener('click', deleteEntry)
                 //attach to the ul
                     ul.insertAdjacentElement('afterbegin', li);
                     li.insertAdjacentElement('beforeend', input);
                     input.insertAdjacentElement('afterend',p);
-                    p.insertAdjacentElement('afterend', button);
+                    p.insertAdjacentElement('afterend', deleteItem);
 }
 function getItemsFromLS(text){ //consolidate with creating new item
     createListItem(text)
