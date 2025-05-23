@@ -97,8 +97,6 @@ input[type='text']{
     padding: 0 15px;
     margin:0 15px;
     background-color: hsl(235, 24%, 19%);
-}
-input[type='text']::placeholder{
     color: hsl(234, 39%, 85%);
 }
 /* footer */
