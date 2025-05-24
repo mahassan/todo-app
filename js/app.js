@@ -13,6 +13,7 @@ const themeButton = document.querySelector(".theme-box");
 const head = document.getElementsByTagName("head");
 let moon = document.querySelector(".fa-moon");
 let deleteItem;
+const children = head[0].children;
 
 form.addEventListener("submit", (e) => {
   e.preventDefault();
@@ -25,9 +26,9 @@ form.addEventListener("submit", (e) => {
 });
 function updateItemsRemaining() {
   if (ul.children.length >= 1) {
-    remainingItems.innerHTML = `${ul.children.length} items left`;
+    remainingItems.innerHTML = `${ul.children.length} items`;
   } else {
-    remainingItems.innerHTML = `${ul.children.length} items left`;
+    remainingItems.innerHTML = `${ul.children.length} items`;
   }
 }
 function deleteEntry(e) {
@@ -112,12 +113,11 @@ window.addEventListener("DOMContentLoaded", () => {
     processed.map((item) => getItemsFromLS(item));
   }
   if (ul.children.length >= 1) {
-    remainingItems.innerHTML = `${ul.children.length} items left`;
+    remainingItems.innerHTML = `${ul.children.length} items.`;
   } else {
-    remainingItems.innerHTML = `${ul.children.length} items left`;
+    remainingItems.innerHTML = `${ul.children.length} items.`;
   }
   theme.addEventListener("click", () => {
-    const children = head[0].children;
     [...children].map((item) => {
       if (item.nodeName === "LINK" && item.href.includes("light-theme.css")) {
         item.href = "./css/dark-theme.css";
@@ -126,7 +126,7 @@ window.addEventListener("DOMContentLoaded", () => {
         moon.classList.remove("fa-moon");
         moon.classList.add("fa-sun");
         //loop over the li and change its x icon
-        [...listItems].map(item => item.children[2].style.color = "#fff");
+        [...listItems].map(item => item.children[2].style.color = "#000");
       } else if (item.nodeName === "LINK" && item.href.includes("dark-theme.css")) {
         item.href = "./css/light-theme.css";
         deleteItem.style.color = "black";
@@ -164,7 +164,13 @@ function createListItem(text) {
   deleteItem = document.createElement("button");
   deleteItem.className = `deleteEntry`;
   deleteItem.style.cursor = "pointer";
-  deleteItem.innerHTML = `<i class="fa-solid fa-xmark fa-1x"></i>`;
+  [...children].map((item) => {
+ if (item.nodeName === "LINK" && item.href.includes("light-theme.css")){
+    deleteItem.innerHTML = `<i class="fa-solid fa-xmark fa-1x"></i>`;
+ }else if(item.nodeName === "LINK" && item.href.includes("dark-theme.css")){
+    deleteItem.innerHTML = `<i class="fa-solid fa-xmark fa-1x" style="color:#000"></i>`;
+ }
+  })
   //add eventlistener to every button
   deleteItem.addEventListener("click", deleteEntry);
   //attach to the ul
