@@ -1,120 +1,21 @@
 
 header{
     background-image: url('../images/bg-mobile-light.jpg');
-    background-repeat: no-repeat;
-    width: 100%;
-    height: 200px;
-    padding:0 20px;
-}
-.heading__container{
-    width: 100%;
-    margin:0 auto;
-    display: flex;
-    justify-content: space-between;
-    padding: 60px 0 30px;
-}
-header h1{
-    font-weight: 100;
-    text-transform: uppercase;
-    color: #fff;
-}   
-li{
-    display: flex;
-    align-items: center;
-    border-bottom: 1px solid grey;
-}
-ul{
-    margin: 15px 0 15px;
-}
-ul li.items:first-child{
-    /* margin:15px 15px 0; */
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
-}
-ul li.items:last-child{
-    /* margin:0px 15px 0; */
-    border-bottom-left-radius: 5px;
-    border-bottom-right-radius: 5px;
-}
-li.items p{
-    flex-grow:2;
-}
-li.items input[type="checkbox"]{
-    appearance: none;
-    -webkit-appearance: none;
-    border-radius: 50px;
-    padding:10px;
-    border:1px solid lightgrey;
-    margin-right: 10px;
-    cursor: pointer;
-}
-li.items input[type="checkbox"]:checked{
-    content: "";
-    background: #57DDFF;
-    background: linear-gradient(140deg, rgba(87, 221, 255, 1) 0%, rgba(192, 88, 243, 1) 100%);
-}
-.strike{
-    text-decoration: line-through;
-}
-li.items,
-div.items{
-    padding:15px;
-    background-color: #fff;
-    border-radius: 0;
 }
 li.items{
-    margin:0 15px 0;
-}
-div.items{
-    padding: 0 15px 0;
-}
-main,
-footer{
-    width:100%;
-    margin: 0 auto;
-    @media (min-width: 375px){
-        width: 375px;
-    }
-}
-button{
-    background: none;
-    border:0;
-}
-.form--input{
-    margin-top:-80px;
-    display: flex;
-    justify-content: center;
-}
-input[type='text']{
-    height:40px;
-    border:0;
-    width:100%;
-    border-radius: 5px;
-    padding: 0 15px;
-    margin:0 15px;
-}
-input[type='text']::before{
-    content: "";
-    border:1px solid red;
-}
-/* footer */
-.footer{
-    padding:15px 0;
     background: #fff;
-    border-radius: 5px;
-    margin:20px 15px 0;
-    display: flex;
-    justify-content: space-evenly;
+    color:#000;
 }
-
+.footer{
+    background:#fff;
+}
+.footer a,
+.footer .listOfItems{
+    color:#000
+}
 /* Media Queries */
 @media (min-width: 375px) {
     header{
         background-image: url('../images/bg-desktop-light.jpg');
-        max-width: 1440px;
-    }
-    .heading__container{
-        width: 375px;
-        padding:60px 10px 15px;
     }
 }
