@@ -120,19 +120,19 @@ window.addEventListener("DOMContentLoaded", () => {
   theme.addEventListener("click", () => {
     [...children].map((item) => {
       if (item.nodeName === "LINK" && item.href.includes("light-theme.css")) {
-        item.href = "./css/dark-theme.css";
-        deleteItem.style.color = "white";
-        themeButton.style.color = "white";
+        cssSwitcher('dark-theme.css', 'white');
+        [...listItems].map(item => item.children[2].style.color = "#000");
+      } else if (item.nodeName === "LINK" && item.href.includes("dark-theme.css")) {
+        [...listItems].map(item => item.children[2].style.color = "#fff");
+        cssSwitcher('light-theme.css', 'black');
+      }
+
+      function cssSwitcher(theme, colour) {
+        item.href = `./css/${theme}`;
+        deleteItem.style.color = `${colour}`;
+        themeButton.style.color = `${colour}`;
         moon.classList.remove("fa-moon");
         moon.classList.add("fa-sun");
-        [...listItems].map(item => item.children[2].children.style.color = "#000");
-      } else if (item.nodeName === "LINK" && item.href.includes("dark-theme.css")) {
-        item.href = "./css/light-theme.css";
-        deleteItem.style.color = "black";
-        themeButton.style.color = "black";
-        moon.classList.remove("fa-sun");
-        moon.classList.add("fa-moon");
-        [...listItems].map(item => item.children[2].children.style.color = "#fff");
       }
     });
   });
