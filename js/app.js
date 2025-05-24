@@ -125,15 +125,15 @@ window.addEventListener("DOMContentLoaded", () => {
         themeButton.style.color = "white";
         moon.classList.remove("fa-moon");
         moon.classList.add("fa-sun");
-      } else if (
-        item.nodeName === "LINK" &&
-        item.href.includes("dark-theme.css")
-      ) {
+        //loop over the li and change its x icon
+        [...listItems].map(item => item.children[2].style.color = "#fff");
+      } else if (item.nodeName === "LINK" && item.href.includes("dark-theme.css")) {
         item.href = "./css/light-theme.css";
         deleteItem.style.color = "black";
         themeButton.style.color = "black";
         moon.classList.remove("fa-sun");
         moon.classList.add("fa-moon");
+        [...listItems].map(item => item.children[2].style.color = "#000");
       }
     });
   });
