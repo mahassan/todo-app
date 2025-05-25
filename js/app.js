@@ -63,7 +63,6 @@ function completedButton() {
 }
 function showAllTasks() {
   [...listItems].map((item) => {
-    debugger;
     if ((item.children[0].parentElement.style.display = "none")) {
       item.children[0].parentElement.style.display = "flex";
     }
@@ -120,17 +119,13 @@ window.addEventListener("DOMContentLoaded", () => {
   theme.addEventListener("click", () => {
     [...children].map((item) => {
       if (item.nodeName === "LINK" && item.href.includes("light-theme.css")) {
-        cssSwitcher('dark-theme.css', 'white');
-        [...listItems].map(item => item.children[2].style.color = "#000");
+        cssSwitcher('dark-theme.css');
       } else if (item.nodeName === "LINK" && item.href.includes("dark-theme.css")) {
-        [...listItems].map(item => item.children[2].style.color = "#fff");
-        cssSwitcher('light-theme.css', 'black');
+        cssSwitcher('light-theme.css');
       }
 
-      function cssSwitcher(theme, colour) {
+      function cssSwitcher(theme) {
         item.href = `./css/${theme}`;
-        deleteItem.style.color = `${colour}`;
-        themeButton.style.color = `${colour}`;
         moon.classList.remove("fa-moon");
         moon.classList.add("fa-sun");
       }
@@ -161,14 +156,13 @@ function createListItem(text) {
   input.insertAdjacentElement("afterend", li);
   //create a close icon
   deleteItem = document.createElement("button");
-  deleteItem.className = `deleteEntry`;
   deleteItem.style.cursor = "pointer";
   [...children].map((item) => {
- if (item.nodeName === "LINK" && item.href.includes("light-theme.css")){
-    deleteItem.innerHTML = `<i class="fa-solid fa-xmark fa-1x"></i>`;
- }else if(item.nodeName === "LINK" && item.href.includes("dark-theme.css")){
-    deleteItem.innerHTML = `<i class="fa-solid fa-xmark fa-1x" style="color:#000"></i>`;
- }
+    if (item.nodeName === "LINK" && item.href.includes("light-theme.css")){
+        deleteItem.innerHTML = `<i class="fa-solid fa-xmark fa-1x" style="color:'black'"></i>`;
+    }else if(item.nodeName === "LINK" && item.href.includes("dark-theme.css")){
+        deleteItem.innerHTML = `<i class="fa-solid fa-xmark fa-1x" style="color:'white'"></i>`;
+    }
   })
   //add eventlistener to every button
   deleteItem.addEventListener("click", deleteEntry);
