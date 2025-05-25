@@ -1,6 +1,9 @@
-
+@import url(./variables.css);
 header{
     background-image: url('../images/bg-mobile-light.jpg');
+}
+input[type='text']{
+    background-color: #fff;
 }
 li.items{
     background: #fff;

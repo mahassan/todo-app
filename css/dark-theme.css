@@ -1,15 +1,15 @@
-
+@import url(./variables.css);
 body{
-    background:hsl(235, 21%, 11%);
+    background:var(--Very-Dark-Blue);
 }
 header{
     background-image: url('../images/bg-mobile-dark.jpg');
 }
 input[type='text']{
-    color: hsl(234, 39%, 85%);
+    color: var(--Light-Grayish-Blue);
 }
 li.items{
-    background: hsl(235, 21%, 11%);;
+    background: var(--Very-Dark-Blue);
 }
 /* Media Queries */
 @media (min-width: 375px) {
