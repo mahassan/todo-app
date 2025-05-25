@@ -120,8 +120,10 @@ window.addEventListener("DOMContentLoaded", () => {
     [...children].map((item) => {
       if (item.nodeName === "LINK" && item.href.includes("light-theme.css")) {
         cssSwitcher('dark-theme.css');
+        [...deleteItem].children.map(item => item.style = "color:white");
       } else if (item.nodeName === "LINK" && item.href.includes("dark-theme.css")) {
         cssSwitcher('light-theme.css');
+        [...deleteItem].children.map(item => item.style = "color:dark");
       }
 
       function cssSwitcher(theme) {
